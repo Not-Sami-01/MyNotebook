@@ -2,8 +2,7 @@
 const connectToMongo = require('./db');
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
-
+const port = 5000;
 const app = express();
 connectToMongo();
 
@@ -14,23 +13,14 @@ app.use(cors());
 app.use('/api/notes',require('./routes/notes'));
 app.use('/api/auth',require('./routes/auth'));
 
-// Serve static files from React build
-app.use(express.static(path.join(__dirname, '../build')));
-
 app.get('/', (req, res)=>{
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
-
+  console.log(req.body);
+  res.send('Hello World');
+}),
 app.get('/about', (req, res)=>{
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
+  res.send('Hello About');
+}),
 
-// Handle all other routes by serving React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
-
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(port, 'localhost', ()=>{
+  console.log(`The app is listening on  http://localhost:${port}`);
 });

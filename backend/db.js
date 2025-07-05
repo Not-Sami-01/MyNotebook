@@ -1,7 +1,6 @@
 "use strict";
 const mongoose = require('mongoose');
-require('dotenv').config();
-const mongoURI = process.env.DB_URI;
+const mongoURI = 'mongodb://localhost:27017/mynotebook';
 async function connectToMongo(){
   await mongoose.connect(mongoURI);
   console.log('Connection was successful');

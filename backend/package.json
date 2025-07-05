@@ -4,7 +4,8 @@
   "description": "myNotebook - Access your notes from cloud online",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "SamiTheDangerousCoder",
   "license": "ISC",
