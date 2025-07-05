@@ -4,7 +4,7 @@ import NoteContext from '../context/notes/NoteContext'
 const AddNote = (props) => {
   const context = useContext(NoteContext);
   const {setAlert} = props;
-  const { addNote, deleteNote } = context;
+  const { addNote } = context;
   const [note, setNote] = useState({ title: '', description: '', tag: '' });
   const handleChange = (event) => {
     event.preventDefault();

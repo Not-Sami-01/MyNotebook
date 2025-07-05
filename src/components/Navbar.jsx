@@ -15,20 +15,19 @@ const Navbar = () => {
   }
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light border-bottom">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">MyNotebook</Link>
           <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="/collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="collapsibleNavId">
             <ul className="navbar-nav me-auto mt-2 mt-lg-0">
               <li className="nav-item">
-                <Link className={`nav-link ${location.pathname == '/' ? 'active' : null}`} to="/" aria-current="page">Home
+                <Link className={`nav-link ${location.pathname === '/' ? 'active fw-bold' : null}`} to="/" aria-current="page">Home
                   <span className="visually-hidden">(current)</span></Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${location.pathname == '/about' ? 'active' : null}`} to="/about">About</Link>
+                <Link className={`nav-link ${location.pathname === '/about' ? 'active fw-bold' : null}`} to="/about">About</Link>
               </li>
             </ul>
             <div className="d-flex justify-content-end">

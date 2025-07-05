@@ -8,7 +8,7 @@ const Signup = (props) => {
     if(loginCheck()){
       navigate('/')
     }
-  },[]);
+  },[loginCheck, navigate]);
 
   let {setAlert} = props;
   // Input validation handlers

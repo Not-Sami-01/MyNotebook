@@ -4,11 +4,11 @@ import React, { useContext } from 'react'
 import NoteContext from '../context/notes/NoteContext'
 const NoteItem = (props) => {
   const context = useContext(NoteContext);
-  const {deleteNote, editNote} = context;
+  const {deleteNote} = context;
   const { note, updateNote } = props;
   return (
     <>
-    <div className="container col-md-4 my-2">
+    <div className="my-2">
       <div className="card mx-auto" style={{
         width: '16rem'
       }}>

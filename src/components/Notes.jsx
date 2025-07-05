@@ -4,12 +4,12 @@ import NoteItem from './NoteItem';
 const Notes = (props) => {
   const {setAlert} = props;
   const state = useContext(NoteContext);
-  let i = 0;
   const { notes, getNotes, editNote } = state;
   const [note, setNote] = useState({id: '', etitle: '', edescription: '', etag: '' });
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getNotes();
-  }, []);
+    getNotes().then(() => setLoading(false));
+  }, [getNotes]);
   const ref = useRef(null);
   const refClose = useRef(null);
   const updateNote = (currNote) => {
@@ -26,6 +26,20 @@ const Notes = (props) => {
     refClose.current.click();
     setAlert('success', 'Note updated successfully');
   }
+
+  if(loading)
+    return (<div className=''  style={{
+      width:'100%',
+      display:'flex',
+      flexDirection: 'column',
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              Loading Notes
+            </div>)
   return (
     <>
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#modalId">
@@ -64,9 +78,15 @@ const Notes = (props) => {
       </div>
 
       <h1 className="text-center mt-4">Notes</h1>
-      <div className="container row mx-auto">
+      <div className="container mx-auto" style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '10px'
+      }}>
         {notes?.length === 0 && <p className="text-center fs-4 mt-1">No notes to display!</p>}
-        {notes?.map((note) => {
+        {notes && notes?.map((note) => {
           return (
             <NoteItem key={note._id} note={note} updateNote={updateNote} />
           )

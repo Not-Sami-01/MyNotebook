@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import NoteContext from '../context/notes/NoteContext';
+import API_BASE_URL from '../config';
 
 const Login = (props) => {
   let {loginCheck} = props;
@@ -9,7 +10,7 @@ const Login = (props) => {
     if(loginCheck()){
       navigate('/')
     }
-  },[]);
+  },[loginCheck, navigate]);
   const {setAlert} = props;
   const context = useContext(NoteContext);
   const [login, setLogin] = useState({ username: '', password: '' });
@@ -22,13 +23,14 @@ const Login = (props) => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-      const response = await fetch('http://localhost:5000/api/auth/login',{
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(login),
-      }).catch(err => {console.log('Error is coming')});
+      // Replace the fetch URL in handleSubmit function:
+const response = await fetch(`${API_BASE_URL}/auth/login`,{
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  method: 'POST',
+  body: JSON.stringify(login),
+}).catch(err => {console.log('Error is coming')});
       const data = await response.json();
       if(data.success){
         localStorage.setItem('authToken', data.authtoken);
